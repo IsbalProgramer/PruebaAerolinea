@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PruebaAerolinea.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace PruebaAerolinea
         public MainPage()
         {
             InitializeComponent();
+
+            MessagingCenter.Subscribe<MainPageViewModel>(this, "AddSurvey", async (a) =>
+            {
+               await Navigation.PushModalAsync(new SurveyDetailsView());
+            });
         }
     }
 }

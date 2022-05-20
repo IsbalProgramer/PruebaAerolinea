@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PruebaAerolinea.Models;
+using PruebaAerolinea.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,19 @@ namespace PruebaAerolinea
         public SurveyDetailsView()
         {
             InitializeComponent();
+
+            MessagingCenter.Subscribe<SurveyDetailsViewModel, Survey>(this,"SaveSurvey", async(a,s) => 
+            {
+                await Navigation.PopModalAsync();
+            });
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            MessagingCenter.Unsubscribe<SurveyDetailsViewModel, Survey>(this,"SaveSurvey" );
+
         }
     }
 }
