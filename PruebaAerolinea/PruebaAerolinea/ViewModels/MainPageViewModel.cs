@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PruebaAerolinea.ViewModels
 {
-    internal class MainPageViewModel
+    public class MainPageViewModel : NotificationObject
     {
     }
 }
