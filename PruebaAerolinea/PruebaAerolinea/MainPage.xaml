@@ -8,7 +8,7 @@
     </ContentPage.BindingContext>
 
     <StackLayout>
-       
+        <Label Text="Solo el señor sabe como lo hice"/>
         <ListView ItemsSource="{Binding Surveys}" />
         <Button Text="+"
                 Command="{Binding AddCommand}"/>
