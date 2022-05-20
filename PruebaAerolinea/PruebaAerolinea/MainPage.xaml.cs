@@ -1,4 +1,5 @@
-﻿using PruebaAerolinea.ViewModels;
+﻿using PruebaAerolinea.Clases;
+using PruebaAerolinea.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,10 +16,20 @@ namespace PruebaAerolinea
         {
             InitializeComponent();
 
-            MessagingCenter.Subscribe<MainPageViewModel>(this, "AddSurvey", async (a) =>
+        }
+
+        async void OnButtonClicked(object sender, EventArgs args)
+        {
+            string error;
+            MySQLConn conn = new MySQLConn();
+            if (conn.TryConnection(out error))
             {
-               await Navigation.PushModalAsync(new SurveyDetailsView());
-            });
+                label.Text = "Conexion Exitosa";
+            }
+            else 
+            {
+                label.Text = error;
+            }
         }
     }
 }

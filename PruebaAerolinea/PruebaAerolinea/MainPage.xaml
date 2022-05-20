@@ -8,10 +8,10 @@
     </ContentPage.BindingContext>
 
     <StackLayout>
-        <Label Text="Solo el señor sabe como lo hice"/>
-        <ListView ItemsSource="{Binding Surveys}" />
-        <Button Text="+"
-                Command="{Binding AddCommand}"/>
+        <Label Text="Probar MYSQL"></Label>
+        <Button Text="Probar Conexión a BD MySQL"
+                Clicked="OnButtonClicked"/>
+        <Label x:Name="label" />
     </StackLayout>
 
 </ContentPage>
