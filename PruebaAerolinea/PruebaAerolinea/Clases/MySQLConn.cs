@@ -14,7 +14,7 @@ namespace PruebaAerolinea.Clases
         public bool TryConnection(out string Error) 
         {
             var myConnectionString = new MySqlConnection();
-            myConnectionString.ConnectionString = "Server=192.168.1.164;Database=aerolinea;Uid=root;Pwd=R00tKaiba123;";
+            myConnectionString.ConnectionString = "Server=192.168.1.164;Database=aerolinea;Uid=PRUEBAS;Pwd=Pru3b4$Kaiba123;";
             try
             {
                 myConnectionString.Open();

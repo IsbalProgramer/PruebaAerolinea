@@ -1,37 +1,35 @@
 ﻿using PruebaAerolinea.Clases;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace PruebaAerolinea
 {
-    public partial class MainPage : MasterDetailPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class Detail : ContentPage
     {
-        public MainPage()
+        public Detail()
         {
             InitializeComponent();
-            this.Master = new MasterHG();
-            this.Detail = new NavigationPage(new Detail());
-            App.MasterDet = this;
-
         }
 
-        /*void OnButtonClicked(object sender, EventArgs args)
+        void OnButtonClicked(object sender, EventArgs args)
         {
             string error;
             MySQLConn conn = new MySQLConn();
             if (conn.TryConnection(out error))
             {
-                label.Text = "Conexion Exitosa";
+                label.Text = "Conexion Exitosa";                
             }
-            else 
+            else
             {
                 label.Text = error;
             }
-        }*/
+        }
     }
 }

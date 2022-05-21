@@ -1,17 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:viewmodels="clr-namespace:PruebaAerolinea.ViewModels"
              x:Class="PruebaAerolinea.MainPage">
-    <ContentPage.BindingContext>
-        <viewmodels:MainPageViewModel/>
-    </ContentPage.BindingContext>
-
+   
+    <!--
     <StackLayout>
         <Label Text="Probar MYSQL"></Label>
         <Button Text="Probar Conexión a BD MySQL"
                 Clicked="OnButtonClicked"/>
         <Label x:Name="label" />
     </StackLayout>
+    -->
 
-</ContentPage>
+</MasterDetailPage>

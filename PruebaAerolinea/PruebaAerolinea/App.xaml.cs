@@ -6,6 +6,8 @@ namespace PruebaAerolinea
 {
     public partial class App : Application
     {
+        public static MasterDetailPage MasterDet { get; set; }
+
         public App()
         {
             InitializeComponent();
