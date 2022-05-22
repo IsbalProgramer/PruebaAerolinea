@@ -1,4 +1,4 @@
-﻿using PruebaAerolinea.Clases;
+﻿using PruebaAerolinea.Conexion;
 using System;
 using System.Collections.Generic;
 using System.Linq;

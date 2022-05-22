@@ -10,6 +10,8 @@ namespace PruebaAerolinea
 
         public App()
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjQyODM1QDMyMzAyZTMxMmUzMGJxUHZWWGtmL3lmYzJoYkxSTTRkZlZkYkZVUS9BQlRhR3B5Vk5oRjc5alk9");
+
             InitializeComponent();
 
             MainPage = new MainPage();

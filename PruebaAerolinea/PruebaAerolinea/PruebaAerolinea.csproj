@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <PackageReference Include="MySqlConnector" Version="2.1.9" />
+    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="20.1.0.56" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="20.1.0.56" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
@@ -23,13 +25,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Consulta.xaml">
+    <EmbeddedResource Update="Pantallas\Consulta.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Detail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="MasterHG.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pantallas\ControlVuelos.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

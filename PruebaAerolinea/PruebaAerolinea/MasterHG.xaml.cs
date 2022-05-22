@@ -1,4 +1,5 @@
 ﻿using PruebaAerolinea.Clases;
+using PruebaAerolinea.Pantallas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace PruebaAerolinea
 
             List<MenuHG> mn = new List<MenuHG>
             {
+                new MenuHG{ page = new ControlVuelos(), menuTitulo = "Control Vuelos", menuDetail = "Inserte y modifique los vuelos"},
                 new MenuHG{ page = new Consulta(), menuTitulo = "Consultas", menuDetail = "Consulte vuelos disponibles"}
             };
             listMenu.ItemsSource = mn;
@@ -31,7 +33,7 @@ namespace PruebaAerolinea
             {
                 App.MasterDet.IsPresented = false;
                 App.MasterDet.Detail.Navigation.PushAsync(men.page);
-                listMenu.Unfocus();
+                
             }
         }
     }

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             x:Class="PruebaAerolinea.Pantallas.ControlVuelos">    
+   
+    <ScrollView HeightRequest="3000">
+        <StackLayout>
+            <Label Text="Aerolineas"/>
+            <combobox:SfComboBox HeightRequest="40" x:Name="aerolineasCombo"/>
+            <Label Text="Origen"/>
+            <combobox:SfComboBox HeightRequest="40" x:Name="origenCombo"/>
+            <Label Text="Destino"/>
+            <combobox:SfComboBox HeightRequest="40" x:Name="destinoCombo"/>
+            <Label Text="Fecha y hora Salida"/>
+            <DatePicker x:Name="startDatePicker"
+                    Format ="yyyy-MM-dd"/>
+            <TimePicker x:Name="startTimePicker"
+                        Format = "HH:mm"/>
+            <Label Text="Fecha y hora llegada"/>
+            <DatePicker x:Name="endDatePicker"
+                    Format ="yyyy-MM-dd"/>
+            <TimePicker x:Name="endTimePicker"
+                        Format = "HH:mm"/>
+            <Label Text="Numero de Asientos"/>
+            <Entry x:Name="asientosEntry" Text="Numero de asientos" />
+            <Label Text="Costo"/>
+            <Entry x:Name="costEntry" Text="Costo de asiento" />
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Guardar" HorizontalOptions="StartAndExpand" Clicked="Button_Clicked_Guardar"/>
+                <Button Text="Actualizar" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>       
+  
+</ContentPage>
