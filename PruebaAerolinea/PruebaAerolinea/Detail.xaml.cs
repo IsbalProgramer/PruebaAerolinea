@@ -18,18 +18,18 @@ namespace PruebaAerolinea
             InitializeComponent();
         }
 
-        void OnButtonClicked(object sender, EventArgs args)
-        {
-            string error;
-            MySQLConn conn = new MySQLConn();
-            if (conn.TryConnection(out error))
-            {
-                label.Text = "Conexion Exitosa";                
-            }
-            else
-            {
-                label.Text = error;
-            }
-        }
+        //void OnButtonClicked(object sender, EventArgs args)
+        //{
+        //    string error;
+        //    MySQLConn conn = new MySQLConn();
+        //    if (conn.TryConnection(out error))
+        //    {
+        //        label.Text = "Conexion Exitosa";                
+        //    }
+        //    else
+        //    {
+        //        label.Text = error;
+        //    }
+        //}
     }
 }

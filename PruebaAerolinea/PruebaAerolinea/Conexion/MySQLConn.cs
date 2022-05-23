@@ -13,21 +13,21 @@ namespace PruebaAerolinea.Conexion
         MySqlConnection myConnectionString = new MySqlConnection();
        
 
-        public bool TryConnection(out string Error)
-        {
-            myConnectionString.ConnectionString = "Server=192.168.1.164;Database=aerolinea;Uid=PRUEBAS;Pwd=Pru3b4$Kaiba123;";
-            try
-            {
-                myConnectionString.Open();
-                Error = "";
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Error = ex.ToString();
-                return false;
-            }
-        }
+        //public bool TryConnection(out string Error)
+        //{
+        //    myConnectionString.ConnectionString = "Server=192.168.1.164;Database=aerolinea;Uid=PRUEBAS;Pwd=Pru3b4$Kaiba123;";
+        //    try
+        //    {
+        //        myConnectionString.Open();
+        //        Error = "";
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Error = ex.ToString();
+        //        return false;
+        //    }
+        //}
 
         private string rutaConexion() 
         {
@@ -90,6 +90,45 @@ namespace PruebaAerolinea.Conexion
                         Asientos = (int)reader.GetInt64("Asientos"),
                         Costo = (int)reader.GetInt64("Costo")
                     }); 
+                }
+                myConnectionString.Close();
+                return list;
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                return null;
+            }
+        }
+
+        public List<CompraConsulta> consultaCompraVuelos()
+        {
+            myConnectionString.ConnectionString = rutaConexion();
+            try
+            {
+                myConnectionString.Open();
+                var command = myConnectionString.CreateCommand();
+                command.CommandText = "select v.IDVuelos AS IDVuelo, ae.nombreAerolinea AS Aerolinea, orig.nombreDestino AS Origen, dest.nombreDestino AS Destino, " +
+                                      "CONCAT(v.FechaSalida, ' ', v.HoraSalida) AS FechaHoraSalida, CONCAT(v.FechaLlegada, ' ', v.HoraLlegada) AS FechaHoraLlegada," +
+                                      "cr.NumeroAsientos AS AsientosComprados, cr.CostoTotal as Costo from Vuelos v inner join aerolinea ae ON v.IDAeroLinea = ae.IDAeroLinea " +
+                                      "inner join Destinos orig on v.IDOrigen = orig.IDDestino inner join Destinos dest ON v.IdDestino = dest.IDDestino " +
+                                      "inner join comprareserva cr on cr.IDVuelos = v.IDVuelos where v.BanderaVueloRealizado = 0 and v.Asientos > 0 and " +
+                                      "cr.BanderaCancelado <> 1 and cr.BanderaComprado = 1;";
+                var reader = command.ExecuteReader();
+                var list = new List<CompraConsulta>();
+                while (reader.Read())
+                {
+                    list.Add(new CompraConsulta
+                    {
+                        IDVuelo = (int)reader.GetInt64("IDVuelo"),
+                        Aerolinea = reader.GetString("Aerolinea"),
+                        Origen = reader.GetString("Origen"),
+                        Destino = reader.GetString("Destino"),
+                        FechaHoraSalida = reader.GetString("FechaHoraSalida"),
+                        FechaHoraLlegada = reader.GetString("FechaHoraLlegada"),
+                        AsientosComprados = (int)reader.GetInt64("AsientosComprados"),
+                        Costo = (int)reader.GetInt64("Costo")
+                    });
                 }
                 myConnectionString.Close();
                 return list;

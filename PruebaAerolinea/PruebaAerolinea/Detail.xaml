@@ -5,10 +5,15 @@
              Title="Aeropuerto Internacional">
     <ContentPage.Content>
         <StackLayout>
+            <!--
             <Label Text="Probar MYSQL"></Label>
             <Button Text="Probar Conexión a BD MySQL"
                 Clicked="OnButtonClicked"/>
-            <Label x:Name="label" />
+            <Label x:Name="label" />            
+            -->
+
+            <Image Source="Aero.jpg" HorizontalOptions="CenterAndExpand" />
+            <Label Text="BIENVENIDOS AL APK DE CONTROL DE VUELOS"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

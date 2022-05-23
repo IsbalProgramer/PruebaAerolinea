@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PruebaAerolinea.Pantallas.CancelaVuelo"
+             Title="Detalle compra">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="" />
+            <Label Text="Aerolinea:"/>
+            <Label x:Name="lblAerolinea" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Origen"/>
+            <Label x:Name="lblOrigen" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Destino"/>
+            <Label x:Name="lblDestino" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Fecha y hora de Salida"/>
+            <Label x:Name="lblFechaHoraSalida" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Fecha y hora de Destino"/>
+            <Label x:Name="lblFechaHoraDestino" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Asientos Comprados"/>
+            <Label x:Name="lblAsientosComprados" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Costo total"/>
+            <Label x:Name="lblCostoTotal" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="" />
+            <Button Text="Cancelar compra" 
+                    HorizontalOptions="CenterAndExpand"
+                    Clicked="Button_Clicked_Cancelar"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
