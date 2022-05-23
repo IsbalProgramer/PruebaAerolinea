@@ -64,6 +64,43 @@ namespace PruebaAerolinea.Conexion
             }
         }
 
+        public List<VueloConsulta> consultaVuelos() 
+        {
+            myConnectionString.ConnectionString = rutaConexion();
+            try 
+            {
+                myConnectionString.Open();
+                var command = myConnectionString.CreateCommand();
+                command.CommandText = "select v.IDVuelos AS IDVuelo, ae.nombreAerolinea AS Aerolinea, orig.nombreDestino AS Origen, dest.nombreDestino AS Destino, " +
+                    "CONCAT(v.FechaSalida,' ', v.HoraSalida) AS FechaHoraSalida, CONCAT(v.FechaLlegada,' ', v.HoraLlegada) AS FechaHoraLlegada, v.Asientos as Asientos, v.CostoPorAsiento as Costo " +
+                    "from Vuelos v inner join aerolinea ae ON v.IDAeroLinea = ae.IDAeroLinea inner join Destinos orig on v.IDOrigen = orig.IDDestino " +
+                    "inner join Destinos dest ON v.IdDestino = dest.IDDestino where v.BanderaVueloRealizado = 0 and v.Asientos > 0;";
+                var reader = command.ExecuteReader();
+                var list = new List<VueloConsulta>();
+                while (reader.Read())
+                {
+                    list.Add(new VueloConsulta
+                    {
+                        IDVuelo = (int)reader.GetInt64("IDVuelo"),
+                        Aerolinea = reader.GetString("Aerolinea"),
+                        Origen = reader.GetString("Origen"),
+                        Destino = reader.GetString("Destino"),
+                        FechaHoraSalida = reader.GetString("FechaHoraSalida"),
+                        FechaHoraLlegada = reader.GetString("FechaHoraLlegada"),
+                        Asientos = (int)reader.GetInt64("Asientos"),
+                        Costo = (int)reader.GetInt64("Costo")
+                    }); 
+                }
+                myConnectionString.Close();
+                return list;
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                return null;
+            }
+        }
+
         public ObservableCollection<Destino> consultaDestinos()
         {
             myConnectionString.ConnectionString = rutaConexion();

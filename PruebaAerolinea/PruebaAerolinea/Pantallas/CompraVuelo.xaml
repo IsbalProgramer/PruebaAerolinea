@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PruebaAerolinea.Pantallas.CompraVuelo"
+             Title="Venta de vuelos">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Numero de Asientos a comprar"/>
+            <Entry x:Name="asientosEntry" Text="Asientos a comprar" Unfocused="asientosEntry_Unfocused" />
+            <Label Text="Costo toal" />
+            <Label x:Name="costoTotal" />
+            <Button Text="Pagar" HorizontalOptions="CenterAndExpand" Clicked="Button_Clicked_Pagar" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

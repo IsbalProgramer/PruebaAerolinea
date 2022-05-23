@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace PruebaAerolinea.Pantallas
     public partial class ControlVuelos : ContentPage
     {
         MySQLConn conn = new MySQLConn();
+        int IDVuelolt = 0;
         public ControlVuelos()
         {
             InitializeComponent();
@@ -26,6 +28,7 @@ namespace PruebaAerolinea.Pantallas
             origenCombo.DisplayMemberPath = "nombreDestino";
             destinoCombo.DataSource = conn.consultaDestinos();
             destinoCombo.DisplayMemberPath = "nombreDestino";
+            lstVuelos.ItemsSource = conn.consultaVuelos();
         }
 
         private async Task<bool> validarFormulario() 
@@ -117,6 +120,10 @@ namespace PruebaAerolinea.Pantallas
                     destinoCombo.Clear();
                     asientosEntry.Text = "";
                     costEntry.Text = "";
+                    List<VueloConsulta> lt = null;
+                    lstVuelos.ItemsSource = lt;
+                    lstVuelos.ItemsSource = conn.consultaVuelos();
+                    IDVuelolt = 0;
                 }
                 else 
                 {
@@ -126,6 +133,97 @@ namespace PruebaAerolinea.Pantallas
             
         }
 
-       
+        private async void lstVuelos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            VueloConsulta vc = (VueloConsulta)e.SelectedItem;
+            IDVuelolt = vc.IDVuelo;
+            aerolineasCombo.Text = vc.Aerolinea;
+            origenCombo.Text = vc.Origen;
+            destinoCombo.Text = vc.Destino;
+            asientosEntry.Text = vc.Asientos.ToString();
+            costEntry.Text = vc.Costo.ToString();
+            guardarBtn.IsEnabled = false;
+            await DisplayAlert("Advertencia", "Si su intención es actualizar un vuelo, ingrese de nuevo los datos pero con aquellos que desee cambiar", "OK");
+        }
+
+        private async void Button_Clicked_Eliminar(object sender, EventArgs e)
+        {
+            if (IDVuelolt != 0)
+            {
+                string error;
+                String SQL = "Delete from Vuelos where IDVuelos = " + IDVuelolt;
+                if (conn.inActElimDatos(SQL, out error) == true)
+                {
+                    await DisplayAlert("Exito", "El vuelo se elimino con éxito", "OK");
+                    aerolineasCombo.Clear();
+                    origenCombo.Clear();
+                    destinoCombo.Clear();
+                    asientosEntry.Text = "";
+                    costEntry.Text = "";
+                    List<VueloConsulta> lt = null;
+                    lstVuelos.ItemsSource = lt;
+                    lstVuelos.ItemsSource = conn.consultaVuelos();
+                    IDVuelolt = 0;
+                    guardarBtn.IsEnabled = true;
+                }
+                else
+                {
+                    await DisplayAlert("Error", error, "OK");
+                }
+               
+            }
+            else 
+            {
+                await DisplayAlert("Advertencia","Seleccione primero el vuelo a eliminar", "OK");
+            }
+            
+
+        }
+
+        private async void Button_Clicked_Actualizar(object sender, EventArgs e)
+        {
+            if (await validarFormulario())
+            {
+                string error;
+                Aerolinea al = (Aerolinea)aerolineasCombo.SelectedItem;
+                Destino oring = (Destino)origenCombo.SelectedItem;
+                Destino final = (Destino)destinoCombo.SelectedItem;
+                Vuelo vuelo = new Vuelo();
+                vuelo.IDAerolinea = al.IDAeroLinea;
+                vuelo.IDOrigen = oring.IDDestino;
+                vuelo.IdDestino = final.IDDestino;
+                vuelo.FechaSalida = startDatePicker.Date.ToString("yyyy-MM-dd");
+                vuelo.HoraSalida = startTimePicker.Time.ToString();
+                vuelo.FechaLlegada = endDatePicker.Date.ToString("yyyy-MM-dd");
+                vuelo.HoraLlegada = endTimePicker.Time.ToString();
+                vuelo.Asiento = Int32.Parse(asientosEntry.Text);
+                vuelo.CostoAsiento = Int32.Parse(costEntry.Text);
+
+                String SQL = "update Vuelos set IDAeroLinea=" + vuelo.IDAerolinea + ",IDOrigen=" + vuelo.IDOrigen + ",IdDestino=" +
+                                vuelo.IdDestino + ",FechaSalida='" + vuelo.FechaSalida + "',HoraSalida = '" + vuelo.HoraSalida + "',FechaLlegada='" +
+                                vuelo.FechaLlegada + "',HoraLlegada='" + vuelo.HoraLlegada + "',Asientos=" + vuelo.Asiento + ",CostoPorAsiento=" +
+                                vuelo.CostoAsiento + " WHERE IDVuelos=" + IDVuelolt;
+
+                if (conn.inActElimDatos(SQL, out error) == true)
+                {
+                    await DisplayAlert("Exito", "El vuelo se actualizo con éxito", "OK");
+                    aerolineasCombo.Clear();
+                    origenCombo.Clear();
+                    destinoCombo.Clear();
+                    asientosEntry.Text = "";
+                    costEntry.Text = "";
+                    List<VueloConsulta> lt = null;
+                    lstVuelos.ItemsSource = lt;
+                    lstVuelos.ItemsSource = conn.consultaVuelos();
+                    IDVuelolt = 0;
+                    guardarBtn.IsEnabled = true;
+                }
+                else
+                {
+                    await DisplayAlert("Error", error, "OK");
+                }
+            }
+            
+        }
     }
 }

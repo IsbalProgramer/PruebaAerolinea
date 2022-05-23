@@ -21,7 +21,8 @@ namespace PruebaAerolinea
             List<MenuHG> mn = new List<MenuHG>
             {
                 new MenuHG{ page = new ControlVuelos(), menuTitulo = "Control Vuelos", menuDetail = "Inserte y modifique los vuelos"},
-                new MenuHG{ page = new Consulta(), menuTitulo = "Consultas", menuDetail = "Consulte vuelos disponibles"}
+                new MenuHG{ page = new Consulta(), menuTitulo = "Consultas", menuDetail = "Consulte y compre los vuelos disponibles"},
+                new MenuHG{ page= new Consulta(), menuTitulo = "Usuario", menuDetail = "Consulte y cancele todos los vuelos pagados"}
             };
             listMenu.ItemsSource = mn;
         }
@@ -33,7 +34,15 @@ namespace PruebaAerolinea
             {
                 App.MasterDet.IsPresented = false;
                 App.MasterDet.Detail.Navigation.PushAsync(men.page);
-                
+                List<MenuHG> mn = null;
+                listMenu.ItemsSource = mn;
+                mn = new List<MenuHG>
+                {
+                    new MenuHG{ page = new ControlVuelos(), menuTitulo = "Control Vuelos", menuDetail = "Inserte y modifique los vuelos"},
+                    new MenuHG{ page = new Consulta(), menuTitulo = "Consultas", menuDetail = "Consulte y compre los vuelos disponibles"},
+                    new MenuHG{ page= new Consulta(), menuTitulo = "Usuario", menuDetail = "Consulte y cancele todos los vuelos pagados"}
+                };
+                listMenu.ItemsSource = mn;
             }
         }
     }
